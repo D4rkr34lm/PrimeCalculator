@@ -1,13 +1,15 @@
 use std::collections::LinkedList;
 use std::io::stdin;
+use std::time::Instant;
 
 fn main() {
-
     println!("Enter upper bound for checking");
     let mut input = String::new();
     stdin().read_line(&mut input).expect("Could not read input");
 
     let max = input.trim().parse::<u64>().unwrap();
+
+    let now = Instant::now();
 
     let mut primes : LinkedList<u64> = LinkedList::new();
 
@@ -17,15 +19,12 @@ fn main() {
 
         if is_prime(&primes, curr) {
             primes.push_back(curr);
-            let prime_text = curr.to_string();
-            println!("{}", prime_text);
-        }
-
-        
+            //let prime_text = curr.to_string();
+            //println!("{}", prime_text);
+        } 
     }
-    
-    
 
+    println!("Calculation finished after {} ms", now.elapsed().as_millis());
 }
 
 
