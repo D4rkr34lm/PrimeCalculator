@@ -14,19 +14,8 @@ fn main() {
     primes.push_back(2);
     
     for curr in 3..max {
-        let mut prime_iter = primes.iter();
-        let mut curr_prime_option = prime_iter.next();
 
-        let mut is_prime = true;
-        while curr_prime_option.is_some_and(|prime| prime*prime <= curr){
-            if curr_prime_option.is_some_and(|prime| curr % prime == 0){
-                is_prime = false;
-                break;
-            }
-            curr_prime_option = prime_iter.next();
-        }
-
-        if is_prime {
+        if is_prime(&primes, curr) {
             primes.push_back(curr);
             let prime_text = curr.to_string();
             println!("{}", prime_text);
@@ -37,4 +26,21 @@ fn main() {
     
     
 
+}
+
+
+fn is_prime (primes : &LinkedList<u64>, number : u64) -> bool{
+    let mut prime_iter = primes.iter();
+    let mut curr_prime_option = prime_iter.next();
+
+    let mut is_prime = true;
+    while curr_prime_option.is_some_and(|prime| prime*prime <= number){
+        if curr_prime_option.is_some_and(|prime| number % prime == 0){
+            is_prime = false;
+            break;
+        }
+        curr_prime_option = prime_iter.next();
+    }
+
+    return is_prime;
 }
